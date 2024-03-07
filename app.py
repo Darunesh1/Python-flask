@@ -11,6 +11,7 @@ BOOKS=[
         'Price':500,
         'Rating':4.7,
         'Year': 1998,
+        'img':'static\img\harrypotter.jpeg'
         
         
     },
@@ -23,6 +24,7 @@ BOOKS=[
         'Price':500,
         'Rating':4.7,
         'Year': 2005,
+        'img':'static\img\Percy Jackson.jpeg'
         
         
     },
@@ -35,6 +37,7 @@ BOOKS=[
         'Price':500,
         'Rating':4.2,
         'Year': 1998,
+        'img':'static\img\Goosebumps.jpeg'
         
         
     },
@@ -47,6 +50,7 @@ BOOKS=[
         'Price':500,
         'Rating':4.2,
         'Year': 1965,
+        'img':'static\img\The Twin Serpents.jpeg'
         
         
     },
