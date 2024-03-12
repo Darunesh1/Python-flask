@@ -1,4 +1,4 @@
-from flask import Flask,render_template
+from flask import Flask,render_template, jsonify
 
 app=Flask(__name__)
 
@@ -59,6 +59,10 @@ BOOKS=[
 @app.route('/')
 def hell_world():
     return render_template('home.html', books=BOOKS)
+
+@app.route('/api/books')
+def list_books():
+    return jsonify(BOOKS)
 
 if __name__=="__main__":
     app.run(debug=True)
