@@ -11,9 +11,11 @@
       crossorigin="anonymous"
     />
   </head>
+  {%include 'navbar.html' %}
   <body>
     <div class="container text-center">
-      <h1 class="mt-4 mb-5">Library Managment System</h1>
+      <h1 class="mt-4 mb-5">Queswand</h1>
+      
       <img
         class="img-fluid rounded"
         src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -29,8 +31,9 @@
       </div>
       <div>
         <button class="btn btn-outline-secondary mb-4">add More</button>
-        <p>Copyright 2024, Queswand</p>
+        
       </div>
     </div>
+    {% include 'footer.html' %}
   </body>
 </html>
