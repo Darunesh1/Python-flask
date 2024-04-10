@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash,jsonify,session
 import sqlite3
 
 app = Flask(__name__)
@@ -52,6 +52,8 @@ BOOKS = [
     }
 ]
 
+
+@app.route('/home', methods=['GET','POST'])
 @app.route('/')
 def home():
     return render_template('home.html', books=BOOKS)
@@ -60,8 +62,44 @@ def home():
 def list_books():
     return jsonify(BOOKS)
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
+    if request.method == 'POST':
+        try:
+            name = request.form['name']
+            password = request.form['pwd']
+
+            # Establish connection to the database
+            con = sqlite3.connect("database.db")
+            cr = con.cursor()
+
+            # Execute SQL SELECT query to retrieve user data based on username and password
+            cr.execute("SELECT * FROM user WHERE username=? AND password=?", (name, password))
+            data = cr.fetchone()
+
+            if data:
+                # Store user data in session upon successful login
+                session["username"] = data['username']
+                session["name"] = data['name']
+                session["email"] = data['email']
+                con.close()  # Close the database connection
+
+                # Redirect to 'home' route upon successful login
+                return redirect(url_for('home'))
+            else:
+                # Display flash message for invalid credentials
+                flash("Invalid Username and Password. Please try again.", "danger")
+                con.close()  # Close the database connection
+
+                # Redirect back to 'login' route if login fails
+                return redirect(url_for('login'))
+
+        except Exception as e:
+            # Handle any exceptions (e.g., database connection error)
+            flash(f"An error occurred: {e}", "danger")
+            return redirect(url_for('login'))
+
+    # Render the login.html template for GET requests
     return render_template('login.html')
 
 @app.route('/signup', methods=['GET', 'POST'])
